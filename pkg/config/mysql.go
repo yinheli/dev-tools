@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"github.com/olekukonko/tablewriter"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
@@ -97,6 +98,26 @@ func (t *MySqlConfig) Use(name string) {
 	for _, c := range t.Configs {
 		if c.Name == name {
 			t.Current = name
+			break
+		}
+	}
+	t.save()
+}
+
+func (t *MySqlConfig) Rename(old, new string) {
+	for _, c := range t.Configs {
+		if c.Name == new {
+			fmt.Println("name exists")
+			return
+		}
+	}
+
+	for _, c := range t.Configs {
+		if c.Name == old {
+			c.Name = new
+			if t.Current == old {
+				t.Current = new
+			}
 			break
 		}
 	}

@@ -69,6 +69,16 @@ func init() {
 				}
 			},
 		},
+
+		&cobra.Command{
+			Use:  "rename",
+			Args: cobra.MinimumNArgs(2),
+			Run: func(cmd *cobra.Command, args []string) {
+				if cfg, ok := getMysqlConfig(); ok {
+					cfg.Rename(args[0], args[1])
+				}
+			},
+		},
 	)
 }
 
