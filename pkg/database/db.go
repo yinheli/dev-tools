@@ -9,10 +9,18 @@ import (
 )
 
 var (
-	DB *gorm.DB
+	DB          *gorm.DB
+	currentAddr string
 )
 
 func InitDB(addr string) error {
+	if DB != nil {
+		if addr == currentAddr {
+			return nil
+		}
+
+		DB.Close()
+	}
 	var err error
 	log.Info("open...", zap.String("addr", addr))
 	DB, err = gorm.Open("mysql", addr)
@@ -24,6 +32,8 @@ func InitDB(addr string) error {
 	if err != nil {
 		return err
 	}
+
+	currentAddr = addr
 
 	DB.DB().SetMaxIdleConns(0)
 	DB.SingularTable(true)

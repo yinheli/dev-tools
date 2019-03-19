@@ -104,7 +104,7 @@ func Tag(column *Column) string {
 		switch column.TitleCaseName {
 		case "Id", "CreatedAt", "UpdatedAt":
 		default:
-			validateTag = ` validate:"required"`
+			// validateTag = ` validate:"required"`
 		}
 	}
 

@@ -18,7 +18,7 @@ type (
 	Column struct {
 		Name          string
 		Comment       string
-		DataType      string
+		ColumnType    string
 		Nullable      bool
 		TitleCaseName string
 		CamelCaseName string
@@ -58,7 +58,7 @@ func ToGo(table string) (string, error) {
 	for _, c := range t.Columns {
 		c.TitleCaseName = TitleCase(c.Name)
 		c.CamelCaseName = CamelCase(c.Name)
-		c.GoType = DataType(c.DataType, c.Nullable, map[string]string{})
+		c.GoType = DataType(c.ColumnType, c.Nullable, map[string]string{})
 		c.Tag = Tag(c)
 	}
 
