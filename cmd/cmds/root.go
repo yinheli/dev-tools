@@ -99,12 +99,15 @@ func Execute() {
 	}
 
 	historyFile := filepath.Join(configDir, ".history")
-	history, _ := os.OpenFile(historyFile, os.O_CREATE|os.O_RDWR, 0600)
+	history, _ := os.OpenFile(historyFile, os.O_CREATE|os.O_RDONLY, 0600)
 
 	line := liner.NewLiner()
 	defer func() {
 		if history != nil {
-			line.WriteHistory(history)
+			var err error
+			if history, err = os.OpenFile(historyFile, os.O_WRONLY|os.O_TRUNC, 0600); err == nil {
+				line.WriteHistory(history)
+			}
 		}
 		line.Close()
 	}()
