@@ -43,6 +43,8 @@ func (t *MySqlConfig) Print() {
 		name := c.Name
 		if c.Name == t.Current {
 			name = "*" + c.Name
+		} else {
+			name = " " + c.Name
 		}
 		table.Append([]string{name, c.Addr})
 	}
