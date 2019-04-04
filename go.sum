@@ -116,8 +116,8 @@ github.com/stretchr/testify v1.2.2/go.mod h1:a8OnRcib4nhh0OaRAV+Yts87kKdq0PP7pXf
 github.com/stretchr/testify v1.3.0 h1:TivCn/peBQ7UY8ooIcPgZFpTNSz0Q2U6UrFlUfqbe0Q=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/tarm/serial v0.0.0-20180830185346-98f6abe2eb07/go.mod h1:kDXzergiv9cbyO7IOYJZWg1U88JhDg3PB6klq9Hg2pA=
-github.com/yinheli/go-toolbox v0.0.0-20190308074230-caebccdea193 h1:0rsYltBsGUqcZ8suMrU3x1875D+Gk4M0cYJECXFsSEg=
-github.com/yinheli/go-toolbox v0.0.0-20190308074230-caebccdea193/go.mod h1:hGJEZT8gfsSjfnrLwt+jPNFeglb5fY54liGjKndXqdA=
+github.com/yinheli/go-toolbox v0.0.0-20190329093057-edd69c8313f4 h1:wC6fkcyCx/JdOKzz5cUEEhTqV5WeFBPSz5SQT+71OZ8=
+github.com/yinheli/go-toolbox v0.0.0-20190329093057-edd69c8313f4/go.mod h1:hGJEZT8gfsSjfnrLwt+jPNFeglb5fY54liGjKndXqdA=
 go.opencensus.io v0.18.0/go.mod h1:vKdFvxhtzZ9onBp9VKHK8z/sRpBMnKAsufL7wlDrCOA=
 go.opencensus.io v0.19.1/go.mod h1:gug0GbSHa8Pafr0d2urOSgoXHZ6x/RUlaiT0d9pqb4A=
 go.uber.org/atomic v1.3.2 h1:2Oa65PReHzfn29GpvgsYwloV9AVFHPDk8tYxt2c2tr4=

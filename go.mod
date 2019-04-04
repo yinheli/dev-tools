@@ -20,7 +20,8 @@ require (
 	github.com/peterh/liner v1.1.0
 	github.com/spf13/cobra v0.0.3
 	github.com/spf13/pflag v1.0.3 // indirect
-	github.com/yinheli/go-toolbox v0.0.0-20190308074230-caebccdea193
+	github.com/stretchr/testify v1.3.0
+	github.com/yinheli/go-toolbox v0.0.0-20190329093057-edd69c8313f4
 	go.uber.org/zap v1.9.1
 	golang.org/x/tools v0.0.0-20190318200714-bb1270c20edf
 	gopkg.in/yaml.v2 v2.2.2
