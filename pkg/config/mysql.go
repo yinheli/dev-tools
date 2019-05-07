@@ -40,7 +40,7 @@ func (t *MySqlConfig) Print() {
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader([]string{"name", "addr"})
 	for _, c := range t.Configs {
-		name := c.Name
+		var name string
 		if c.Name == t.Current {
 			name = "*" + c.Name
 		} else {

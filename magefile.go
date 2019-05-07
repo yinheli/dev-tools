@@ -23,8 +23,29 @@ var (
 
 // tidy code
 func Fmt() error {
-	packages := strings.Split("cmd pkg version", " ")
-	return sh.Run("gofmt", append([]string{"-s", "-l", "-w", "mage.go", "magefile.go"}, packages...)...)
+	f, _ := os.Open("./")
+	fs, _ := f.Readdir(-1)
+
+	items := make([]string, 0, 32)
+	for _, it := range fs {
+		if it.IsDir() {
+			if strings.HasPrefix(it.Name(), ".") {
+				continue
+			}
+			items = append(items, it.Name())
+			continue
+		}
+
+		if strings.HasSuffix(it.Name(), ".go") {
+			items = append(items, it.Name())
+		}
+	}
+	return sh.Run("gofmt", append([]string{"-s", "-l", "-w"}, items...)...)
+}
+
+// golangci-lint
+func Lint() error {
+	return sh.RunV("golangci-lint", "run", "--fix")
 }
 
 // for local machine build
