@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"github.com/yinheli/dev-tools/pkg/database"
 	"golang.org/x/tools/imports"
+	"strings"
 	"text/template"
 )
 
@@ -16,12 +17,12 @@ type (
 	}
 
 	Column struct {
-		Name          string
 		Comment       string
 		ColumnType    string
 		Nullable      bool
 		TitleCaseName string
 		CamelCaseName string
+		ColumnName    string
 		GoType        string
 		Tag           string
 	}
@@ -42,12 +43,12 @@ type {{.TitleCaseName}} struct {
 
 func ToGo(table string) (string, error) {
 	var t Table
-	err := database.DB.Raw(`select t.table_name name, t.table_comment comment from information_schema.tables t where t.table_schema = database() and t.table_name=?`, table).Scan(&t).Error
+	err := database.DB.Raw(`select lower(t.table_name) name, t.table_comment comment from information_schema.tables t where t.table_schema = database() and t.table_name=?`, table).Scan(&t).Error
 	if err != nil {
 		return "", err
 	}
 	var cols []*Column
-	err = database.DB.Raw(`select column_name name, column_type, column_comment comment, if(lower(is_nullable)='yes', 1, 0) is_nullable from information_schema.columns t where t.table_schema=database() and t.table_name=?`, table).Find(&cols).Error
+	err = database.DB.Raw(`select column_name column_name, column_type column_type, column_comment comment, if(lower(is_nullable)='yes', true, false) nullable from information_schema.columns t where t.table_schema=database() and t.table_name=?`, table).Find(&cols).Error
 	if err != nil {
 		return "", err
 	}
@@ -56,8 +57,9 @@ func ToGo(table string) (string, error) {
 
 	t.TitleCaseName = TitleCase(t.Name)
 	for _, c := range t.Columns {
-		c.TitleCaseName = TitleCase(c.Name)
-		c.CamelCaseName = CamelCase(c.Name)
+		lowerColumnName := strings.ToLower(c.ColumnName)
+		c.TitleCaseName = TitleCase(lowerColumnName)
+		c.CamelCaseName = CamelCase(lowerColumnName)
 		c.GoType = DataType(c.ColumnType, c.Nullable, map[string]string{})
 		c.Tag = Tag(c)
 	}

@@ -20,8 +20,6 @@ func CamelCase(str string) string {
 }
 
 func DataType(dataType string, nullable bool, typeMapping map[string]string) string {
-	dataType = strings.ToLower(strings.TrimSpace(dataType))
-
 	goType := "string"
 
 	dataType = strings.ToLower(strings.TrimSpace(dataType))
@@ -98,7 +96,7 @@ func toCamelCase(s string, first bool) string {
 }
 
 func Tag(column *Column) string {
-	jsonTag := fmt.Sprintf(`json:"%s"`, JsonTag(column.CamelCaseName, column.GoType))
+	jsonTag := fmt.Sprintf(`gorm:"Column:%s" json:"%s"`, column.ColumnName, JsonTag(column.CamelCaseName, column.GoType))
 	validateTag := ""
 	if !column.Nullable {
 		switch column.TitleCaseName {
