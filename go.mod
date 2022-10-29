@@ -8,7 +8,7 @@ require (
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/peterh/liner v1.2.2
-	github.com/spf13/cobra v1.5.0
+	github.com/spf13/cobra v1.6.1
 	github.com/yinheli/go-toolbox v1.0.0
 	go.uber.org/zap v1.23.0
 	golang.org/x/tools v0.1.12
